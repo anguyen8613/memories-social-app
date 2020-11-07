@@ -13,7 +13,6 @@ const Form = () => {
     const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
-        console.log(postData);
         e.preventDefault();
         dispatch(createPost(postData));
     }

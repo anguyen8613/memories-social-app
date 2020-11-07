@@ -1,0 +1,24 @@
+CLIENT
+npm install axios momemt react-file-base64 redux redux-thunk @material-ui/core
+
+
+
+
+Redux
+-The reducer uses the action's payload to make changes to the state.
+
+POST
+button pressed -> action -> axios -> action -> data returned -> reducer -> modify state of store
+
+GET
+called in useEffect hook -> 
+
+
+
+
+
+
+
+
+SERVER
+npm install 
