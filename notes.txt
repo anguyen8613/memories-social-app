@@ -22,3 +22,55 @@ called in useEffect hook ->
 
 SERVER
 npm install 
+
+
+1.
+const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createPost(postData));
+}
+
+2.action -posts.js
+export const createPost = (post) => async(dispatch) => {
+    try{
+        const{data} = await api.createPost(post);
+        dispatch({type: 'CREATE', payload: data});
+        console.log(data);
+    }catch(e){
+        console.log(e.message);
+    }
+}
+
+3.api -index.js
+export const createPost = (newPost) => axios.post(url, newPost);
+
+4.  back to action.  dispatch action with type and payload to reducer
+
+5.  reducer.js 
+export default (posts = [], action) => {
+    switch(action.type){
+        case 'FETCH_ALL':
+            return action.payload;
+        case 'CREATE':
+            return [...posts, action.payload];
+        default:
+            return posts;
+    }
+}
+
+
+6. reducers index.js combine reducers
+export default combineReducers({
+    posts : posts
+})
+
+7.  index.js
+import reducers from './reducers'; -- importing combined reducers
+const store = createStore(reducers, compose(applyMiddleware(thunk)));
+ReactDOM.render(
+    <Provider store = {store}>
+        <App />
+    </Provider>, 
+    document.getElementById('root')
+);
+
