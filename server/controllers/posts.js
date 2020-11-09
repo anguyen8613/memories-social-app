@@ -41,3 +41,15 @@ export const deletePost = async(req, res) => {
         console.log(e);
     }
 }
+
+export const likePost = async(req, res) => {
+    try{
+        const {id: _id} = req.params;
+        const post = await PostMessage.findById(_id);
+        post.likeCount ++;
+        const updatedPost = await post.save();
+        res.json(updatedPost);       
+    }catch(e){
+        console.log(e);
+    }
+}
