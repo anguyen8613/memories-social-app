@@ -118,3 +118,5 @@ acor/proxyMetaData.settings
 
 # GitLab CI/CD (pipelines)
 builds/0/project**
+
+.env
