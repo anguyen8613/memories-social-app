@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import PostMessage from '../models/postMessage.js';
 
 export const getPosts = async(req, res) => {
@@ -18,5 +19,37 @@ export const createPost = async(req, res) => {
        res.status(201).json(newPostMessage);
     }catch(e){
         res.status(409).json({message: e.message})
+    }
+}
+
+export const updatePost = async (req, res) => {
+    const { id : _id } = req.params;
+    const post = req.body;
+    
+    if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send(`No post with id: ${_id}`);
+    const updatedPost = await PostMessage.findByIdAndUpdate(_id, {...post, _id }, { new: true });
+    res.json(updatedPost);
+}
+
+export const deletePost = async(req, res) => {
+    const {id: _id} = req.params;
+    console.log(_id);
+    try{
+        await PostMessage.findByIdAndDelete(_id);
+        res.json({message: 'post deleted'});
+    }catch(e){
+        console.log(e);
+    }
+}
+
+export const likePost = async(req, res) => {
+    try{
+        const {id: _id} = req.params;
+        const post = await PostMessage.findById(_id);
+        post.likeCount ++;
+        const updatedPost = await post.save();
+        res.json(updatedPost);       
+    }catch(e){
+        console.log(e);
     }
 }
