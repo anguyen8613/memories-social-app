@@ -5,7 +5,7 @@ import Posts from './components/Posts/Posts';
 import { getPosts } from './actions/posts';
 import Form from './components/Form/Form';
 
-import memories from './images/memories.png';
+import pets from './images/pets.png';
 import makeStyles from './styles';
 
 const App = () => {
@@ -19,8 +19,8 @@ const App = () => {
     return (
         <Container maxwidth = "lg">
             <AppBar className={classes.appBar} position="static" color="inherit">
-                <Typography className={classes.heading} variant="h2" align="center">Memories</Typography>
-                <img className={classes.image} src={memories} alt="memories" height="60"/>
+                <Typography className={classes.heading} variant="h2" align="center">Pets Social</Typography>
+                <img className={classes.image} src={pets} alt="pets" height="60"/>
             </AppBar>
             <Grow in>
                 <Container>
